@@ -1,0 +1,80 @@
+[
+  {
+    "id": 101,
+    "tname": "Pepperoni",
+    "price": 110,
+    "image": "https://via.placeholder.com/100"
+  },
+  {
+    "id": 102,
+    "tname": "Mushroom",
+    "price": 35,
+    "image": "https://via.placeholder.com/100"
+  },
+  {
+    "id": 103,
+    "tname": "Black beans",
+    "price": 45,
+    "image": "https://via.placeholder.com/100"
+  },
+  {
+    "id": 104,
+    "tname": "Black olive",
+    "price": 50,
+    "image": "https://via.placeholder.com/100"
+  },
+  {
+    "id": 105,
+    "tname": "Green olive",
+    "price": 50,
+    "image": "https://via.placeholder.com/100"
+  },
+  {
+    "id": 106,
+    "tname": "Jalapeno",
+    "price": 45,
+    "image": "https://via.placeholder.com/100"
+  },
+  {
+    "id": 107,
+    "tname": "Chicken",
+    "price": 60,
+    "image": "https://via.placeholder.com/100"
+  },
+  {
+    "id": 108,
+    "tname": "Tomato",
+    "price": 20,
+    "image": "https://via.placeholder.com/100"
+  },
+  {
+    "id": 109,
+    "tname": "Red peprika",
+    "price": 30,
+    "image": "https://via.placeholder.com/100"
+  },
+  {
+    "id": 110,
+    "tname": "Paneer",
+    "price": 45,
+    "image": "https://via.placeholder.com/100"
+  },
+  {
+    "id": 111,
+    "tname": "Fried Onion",
+    "price": 18,
+    "image": "https://via.placeholder.com/100"
+  },
+  {
+    "id": 112,
+    "tname": "Capsicum",
+    "price": 15,
+    "image": "https://via.placeholder.com/100"
+  },
+  {
+    "id": 114,
+    "tname": "Sweet corn",
+    "price": 38,
+    "image": "https://via.placeholder.com/100"
+  }
+]

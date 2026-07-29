@@ -1,0 +1,45 @@
+<section class="pizza-page">
+  <h1>Order Pizza</h1>
+
+  <p *ngIf="pizzas.length === 0">
+    Loading pizzas...
+  </p>
+
+  <div class="pizza-grid">
+    <article class="pizza-card" *ngFor="let pizza of pizzas">
+      <div class="pizza-info">
+        <h2>{{ pizza.name }}</h2>
+
+        <span
+          class="food-type"
+          [class.veg]="pizza.type === 'veg'"
+          [class.nonveg]="pizza.type === 'nonveg'"
+        >
+          {{ pizza.type === 'veg' ? 'Veg' : 'Non-Veg' }}
+        </span>
+
+        <p class="price">₹{{ pizza.price }}</p>
+
+        <p>{{ pizza.description }}</p>
+
+        <p>
+          <strong>Ingredients:</strong>
+          {{ pizza.ingredients.join(', ') }}
+        </p>
+
+        <p>
+          <strong>Toppings:</strong>
+          {{ pizza.topping.join(', ') }}
+        </p>
+      </div>
+
+      <div class="pizza-image-area">
+        <img [src]="pizza.image" [alt]="pizza.name" />
+
+        <button type="button" (click)="addToCart(pizza)">
+            Add to Cart
+        </button>
+      </div>
+    </article>
+  </div>
+</section>

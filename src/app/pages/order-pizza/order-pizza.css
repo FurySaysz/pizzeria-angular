@@ -1,0 +1,78 @@
+.pizza-page {
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+.pizza-page h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.pizza-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.pizza-card {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+
+.pizza-info {
+  flex: 1;
+}
+
+.pizza-info h2 {
+  margin-top: 0;
+}
+
+.price {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.food-type {
+  display: inline-block;
+  padding: 4px 8px;
+  color: white;
+  font-size: 13px;
+  border-radius: 3px;
+}
+
+.veg {
+  background-color: green;
+}
+
+.nonveg {
+  background-color: red;
+}
+
+.pizza-image-area {
+  width: 180px;
+  text-align: center;
+}
+
+.pizza-image-area img {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+}
+
+.pizza-image-area button {
+  margin-top: 12px;
+  padding: 10px 18px;
+  background-color: orange;
+  border: none;
+  cursor: pointer;
+}
+
+@media (max-width: 800px) {
+  .pizza-grid {
+    grid-template-columns: 1fr;
+  }
+}

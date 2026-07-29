@@ -1,0 +1,32 @@
+<h1>Shopping Cart</h1>
+
+<div *ngIf="cartItems.length === 0">
+  <h3>Your cart is empty.</h3>
+</div>
+
+<div *ngFor="let item of cartItems" class="cart-item">
+
+  <img
+    [src]="item.pizza.image"
+    [alt]="item.pizza.name"
+    width="120"
+  />
+
+  <div>
+    <h2>{{ item.pizza.name }}</h2>
+
+    <p>Price: ₹{{ item.pizza.price }}</p>
+
+    <p>
+      Quantity: {{ item.quantity }}
+      <button (click)="decreaseQuantity(item.pizza.id)">−</button>
+      <button (click)="increaseQuantity(item.pizza.id)">+</button>
+    </p>
+
+    <p>
+      Total: ₹{{ item.pizza.price * item.quantity }}
+    </p>
+
+  </div>
+
+</div>
