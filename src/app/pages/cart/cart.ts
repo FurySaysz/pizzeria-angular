@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  computed
+} from '@angular/core';
+
 import { CommonModule } from '@angular/common';
 
 import { CartService } from '../../services/cart';
-import { CartItem } from '../../models/cart-item';
 
 @Component({
   selector: 'app-cart',
@@ -11,23 +14,88 @@ import { CartItem } from '../../models/cart-item';
   templateUrl: './cart.html',
   styleUrl: './cart.css'
 })
-export class Cart implements OnInit {
+export class Cart {
+  readonly cartItems = computed(
+    () => this.cartService.cartItems()
+  );
 
-  cartItems: CartItem[] = [];
+  readonly ingredientsTotal = computed(() =>
+    this.cartItems().reduce(
+      (total, item) =>
+        total +
+        Number(item.pizza.ingredientCost ?? 0) *
+          item.quantity,
+      0
+    )
+  );
 
-  constructor(private cartService: CartService) {}
+  readonly pizzaTotal = computed(() =>
+    this.cartItems().reduce(
+      (total, item) => {
+        const completePrice =
+          Number(item.pizza.price);
 
-  ngOnInit(): void {
-    this.cartService.cartItems$.subscribe((items) => {
-      this.cartItems = items;
-    });
+        const ingredientPrice =
+          Number(item.pizza.ingredientCost ?? 0);
+
+        const basePizzaPrice =
+          completePrice - ingredientPrice;
+
+        return (
+          total +
+          basePizzaPrice * item.quantity
+        );
+      },
+      0
+    )
+  );
+
+  readonly grandTotal = computed(
+    () =>
+      this.pizzaTotal() +
+      this.ingredientsTotal()
+  );
+
+  constructor(
+    private cartService: CartService
+  ) {}
+
+  increaseQuantity(
+    pizzaId: string | number
+  ): void {
+    this.cartService.increaseQuantity(
+      pizzaId
+    );
   }
 
-  increaseQuantity(pizzaId: string): void {
-    this.cartService.increaseQuantity(pizzaId);
+  decreaseQuantity(
+    pizzaId: string | number
+  ): void {
+    this.cartService.decreaseQuantity(
+      pizzaId
+    );
   }
 
-  decreaseQuantity(pizzaId: string): void {
-    this.cartService.decreaseQuantity(pizzaId);
+  removeItem(
+    pizzaId: string | number
+  ): void {
+    this.cartService.removeItem(
+      pizzaId
+    );
+  }
+
+  clearCart(): void {
+    this.cartService.clearCart();
+  }
+
+  payNow(): void {
+    if (this.cartItems().length === 0) {
+      alert('Your cart is empty.');
+      return;
+    }
+
+    alert('Order placed successfully!');
+
+    this.cartService.clearCart();
   }
 }

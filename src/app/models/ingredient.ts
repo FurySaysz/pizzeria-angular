@@ -1,6 +1,6 @@
 export interface Ingredient {
   id: number;
-  tname: string;
+  name: string;
   price: number;
   image: string;
 }

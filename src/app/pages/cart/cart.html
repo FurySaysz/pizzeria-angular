@@ -1,32 +1,174 @@
-<h1>Shopping Cart</h1>
+<section class="cart-page">
+  <h1>Shopping Cart Page</h1>
 
-<div *ngIf="cartItems.length === 0">
-  <h3>Your cart is empty.</h3>
-</div>
-
-<div *ngFor="let item of cartItems" class="cart-item">
-
-  <img
-    [src]="item.pizza.image"
-    [alt]="item.pizza.name"
-    width="120"
-  />
-
-  <div>
-    <h2>{{ item.pizza.name }}</h2>
-
-    <p>Price: ₹{{ item.pizza.price }}</p>
-
-    <p>
-      Quantity: {{ item.quantity }}
-      <button (click)="decreaseQuantity(item.pizza.id)">−</button>
-      <button (click)="increaseQuantity(item.pizza.id)">+</button>
-    </p>
-
-    <p>
-      Total: ₹{{ item.pizza.price * item.quantity }}
-    </p>
-
+  <div
+    *ngIf="cartItems().length === 0"
+    class="empty-cart"
+  >
+    <h3>Your cart is empty.</h3>
   </div>
 
-</div>
+  <div
+    *ngIf="cartItems().length > 0"
+    class="cart-layout"
+  >
+    <div class="cart-panel">
+      <h2>My Cart</h2>
+
+      <div
+        class="cart-row"
+        *ngFor="let item of cartItems()"
+      >
+        <img
+          [src]="item.pizza.image"
+          [alt]="item.pizza.name"
+          class="pizza-image"
+        />
+
+        <div
+          class="food-indicator"
+          [class.veg]="
+            item.pizza.type === 'veg'
+          "
+          [class.nonveg]="
+            item.pizza.type === 'nonveg'
+          "
+        >
+          <span></span>
+        </div>
+
+        <div class="pizza-details">
+          <h3>{{ item.pizza.name }}</h3>
+
+          <p>
+            ₹{{ item.pizza.price }}
+          </p>
+
+          <details
+            class="ingredient-dropdown"
+            *ngIf="
+              item.pizza.topping?.length
+            "
+          >
+            <summary>
+              Selected Ingredients
+            </summary>
+
+            <ul>
+              <li
+                *ngFor="
+                  let ingredient
+                  of item.pizza.topping
+                "
+              >
+                {{ ingredient }}
+              </li>
+            </ul>
+          </details>
+        </div>
+
+        <div class="quantity-box">
+          <button
+            type="button"
+            (click)="
+              decreaseQuantity(
+                item.pizza.id
+              )
+            "
+          >
+            −
+          </button>
+
+          <span>
+            {{ item.quantity }}
+          </span>
+
+          <button
+            type="button"
+            (click)="
+              increaseQuantity(
+                item.pizza.id
+              )
+            "
+          >
+            +
+          </button>
+        </div>
+
+        <div class="item-total">
+          ₹{{
+            item.pizza.price *
+            item.quantity
+          }}
+        </div>
+
+        <button
+          type="button"
+          class="remove-button"
+          (click)="
+            removeItem(item.pizza.id)
+          "
+        >
+          🗑
+        </button>
+      </div>
+
+      <div class="subtotal">
+        Sub Total:
+        <strong>
+          ₹{{ grandTotal() }}
+        </strong>
+      </div>
+    </div>
+
+    <div class="summary-section">
+      <div class="summary-card">
+        <h2>The total amount of</h2>
+
+        <div class="summary-line">
+          <span>Pizza</span>
+
+          <span>
+            ₹{{ pizzaTotal() }}
+          </span>
+        </div>
+
+        <div class="summary-line">
+          <span>Ingredients</span>
+
+          <span>
+            ₹{{ ingredientsTotal() }}
+          </span>
+        </div>
+
+        <hr />
+
+        <div class="summary-total">
+          Total:
+
+          <strong>
+            ₹{{ grandTotal() }}
+          </strong>
+        </div>
+      </div>
+
+      <div class="summary-actions">
+        <button
+          type="button"
+          class="pay-button"
+          (click)="payNow()"
+        >
+          Pay
+        </button>
+
+        <button
+          type="button"
+          class="clear-button"
+          (click)="clearCart()"
+        >
+          Clear
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

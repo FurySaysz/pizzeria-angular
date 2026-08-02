@@ -1,24 +1,115 @@
 .navbar {
+  height: 64px;
+  padding: 0 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #1f2937;
-  padding: 12px 24px;
+  background: #000;
+  box-sizing: border-box;
 }
 
-.logo,
-.nav-links a,
+.brand-section {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.brand-name {
+  color: #d8d8d8;
+  text-decoration: none;
+  font-size: 20px;
+  font-family: Georgia, serif;
+}
+
+.logo {
+  width: 52px;
+  height: 52px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.navbar a {
+  color: #d8d8d8;
+  text-decoration: none;
+  font-size: 17px;
+  transition: .2s;
+}
+
+.navbar a:hover {
+  color: #fff;
+}
+
+.active-link {
+  color: #fff !important;
+}
+
+/* Shopping Cart Button */
+
 .cart-button {
-  color: white;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  background: #f4a61d;
+  color: #fff !important;
+
+  padding: 10px 16px;
+  border-radius: 2px;
+
+  font-size: 17px;
+  font-weight: 500;
   text-decoration: none;
 }
 
-.nav-links {
-  display: flex;
-  gap: 20px;
+.cart-button:hover,
+.active-cart {
+  background: #e59d17;
 }
 
-.active {
-  color: orange;
+/* Count Box */
+
+.cart-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 20px;
+  height: 20px;
+
+  background: #222;
+  color: #fff;
+
+  border-radius: 2px;
+
+  font-size: 12px;
   font-weight: bold;
+
+  margin-left: 2px;
+}
+
+/* Remove old badge */
+
+.cart-badge {
+  display: none;
+}
+
+/* Responsive */
+
+@media (max-width:700px) {
+
+  .navbar {
+    flex-direction: column;
+    height: auto;
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .brand-section {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .cart-button {
+    font-size: 15px;
+  }
 }

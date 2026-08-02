@@ -1,1 +1,181 @@
-<p>build-pizza works!</p>
+<section class="build-pizza-page">
+  <h1>Build Your Pizza</h1>
+
+  <p class="description">
+    First select a base pizza, then customize it by choosing
+    extra ingredients.
+  </p>
+
+  <h2 class="section-title">
+    Step 1 — Choose Your Base Pizza
+  </h2>
+
+  <div class="pizza-selection">
+    <article
+      *ngFor="let pizza of basePizzas()"
+      class="base-pizza-card"
+      [class.selected]="isPizzaSelected(pizza.id)"
+      (click)="selectPizza(pizza)"
+    >
+      <img
+        [src]="pizza.image"
+        [alt]="pizza.name"
+        class="base-pizza-image"
+      />
+
+      <div
+        class="food-type"
+        [class.veg]="pizza.type === 'veg'"
+        [class.nonveg]="pizza.type === 'nonveg'"
+      >
+        <span></span>
+      </div>
+
+      <div class="base-pizza-details">
+        <h3>
+          {{ pizza.name }}
+        </h3>
+
+        <p>
+          ₹{{ pizza.price }}
+        </p>
+
+        <button
+          type="button"
+          class="select-button"
+          [class.selected-button]="
+            isPizzaSelected(pizza.id)
+          "
+        >
+          {{
+            isPizzaSelected(pizza.id)
+              ? 'Selected'
+              : 'Select'
+          }}
+        </button>
+      </div>
+    </article>
+  </div>
+
+  <h2 class="section-title">
+    Step 2 — Select Extra Ingredients
+  </h2>
+
+  <p
+    class="selection-message"
+    *ngIf="!selectedPizza()"
+  >
+    Please select a base pizza before choosing ingredients.
+  </p>
+
+  <table class="ingredients-table">
+    <tbody>
+      <tr
+        *ngFor="let ingredient of ingredients()"
+        [class.disabled-row]="
+          isIngredientDisabled(ingredient)
+        "
+      >
+        <td>
+          <img
+            [src]="ingredient.image"
+            [alt]="ingredient.name"
+            class="ingredient-image"
+          />
+        </td>
+
+        <td>
+          {{ ingredient.name }}
+        </td>
+
+        <td>
+          ₹{{ ingredient.price }}
+        </td>
+
+        <td>
+          <label
+            class="add-label"
+            [class.disabled]="
+              isIngredientDisabled(
+                ingredient
+              )
+            "
+            [for]="
+              'ingredient-' +
+              ingredient.id
+            "
+          >
+            <input
+              type="checkbox"
+              [id]="
+                'ingredient-' +
+                ingredient.id
+              "
+              [checked]="
+                isIngredientSelected(
+                  ingredient.id
+                )
+              "
+              [disabled]="
+                isIngredientDisabled(
+                  ingredient
+                )
+              "
+              (change)="
+                toggleIngredient(
+                  ingredient,
+                  $event
+                )
+              "
+            />
+
+            <span>
+              {{
+                selectedPizza()?.name
+                  ?.trim()
+                  ?.toLowerCase() ===
+                ingredient.name
+                  .trim()
+                  .toLowerCase()
+                  ? 'Core'
+                  : 'Add'
+              }}
+            </span>
+          </label>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="price-summary">
+    <p>
+      <span>Base Pizza:</span>
+
+      <strong>
+        ₹{{ selectedPizza()?.price || 0 }}
+      </strong>
+    </p>
+
+    <p>
+      <span>Extra Ingredients:</span>
+
+      <strong>
+        ₹{{ ingredientCost() }}
+      </strong>
+    </p>
+
+    <h2>
+      Total Cost:
+      ₹{{ totalCost() }}
+    </h2>
+  </div>
+
+  <button
+    type="button"
+    class="build-button"
+    [disabled]="!selectedPizza()"
+    (click)="buildPizza()"
+  >
+    Build Your Pizza
+  </button>
+</section>

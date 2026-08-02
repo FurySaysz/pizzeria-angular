@@ -1,10 +1,13 @@
 export interface Pizza {
-  id: string;
-  type: 'veg' | 'nonveg';
-  price: number;
+  id: string | number;
   name: string;
-  image: string;
   description: string;
+  type: string;
   ingredients: string[];
   topping: string[];
+  price: number;
+  image: string;
+
+  basePrice?: number;
+  ingredientCost?: number;
 }

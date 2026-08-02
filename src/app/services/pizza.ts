@@ -9,8 +9,8 @@ import { Ingredient } from '../models/ingredient';
   providedIn: 'root'
 })
 export class PizzaService {
-  private readonly pizzasUrl = '/data/pizzas.json';
-private readonly ingredientsUrl = '/data/ingredients.json';
+  private readonly pizzasUrl = '/data/pizza-data.json';
+  private readonly ingredientsUrl = '/data/ingredients.json';
 
   constructor(private http: HttpClient) {}
 
